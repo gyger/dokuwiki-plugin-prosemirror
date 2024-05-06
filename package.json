@@ -33,10 +33,10 @@
         "webpack-cli": "^3.1.2"
     },
     "scripts": {
-        "dev": "export NODE_OPTIONS=--openssl-legacy-provider && webpack -d",
-        "watch": "export NODE_OPTIONS=--openssl-legacy-provider && webpack -dw",
+        "dev": "NODE_OPTIONS=--openssl-legacy-provider webpack -d",
+        "watch": "NODE_OPTIONS=--openssl-legacy-provider webpack -dw",
         "test": "jest",
-        "build": "export NODE_OPTIONS=--openssl-legacy-provider && webpack -p",
+        "build": "NODE_OPTIONS=--openssl-legacy-provider webpack -p",
         "eslint": "NODE_ENV=production eslint script/",
         "stylelint": "stylelint *.less --syntax less",
         "lint": "yarn eslint && yarn stylelint"
