@@ -1,6 +1,8 @@
 import { keymap } from 'prosemirror-keymap';
 import { splitListItem, sinkListItem, liftListItem } from 'prosemirror-schema-list';
-import { baseKeymap, chainCommands, exitCode } from 'prosemirror-commands';
+import {
+    baseKeymap, chainCommands, exitCode, toggleMark,
+} from 'prosemirror-commands';
 import { redo, undo } from 'prosemirror-history';
 
 
@@ -18,6 +20,13 @@ function getKeymapPlugin(schema) {
         }
         return acc;
     }, {});
+
+    const formatKeymap = {
+        'Mod-b': toggleMark(schema.marks.strong),
+        'Mod-B': toggleMark(schema.marks.strong),
+        'Mod-i': toggleMark(schema.marks.em),
+        'Mod-I': toggleMark(schema.marks.em),
+    };
 
     const historyKeymap = { 'Mod-z': undo, 'Mod-Shift-z': redo };
     if (!isMac) {
@@ -48,6 +57,7 @@ function getKeymapPlugin(schema) {
         ...baseKeymap,
         ...customKeymap,
         ...combinedKeymapUnion,
+        ...formatKeymap,
         ...historyKeymap,
         ...indentationKeymap,
         ...hardBreakKeymap,
